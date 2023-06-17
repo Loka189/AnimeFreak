@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'horizontal.dart';
+import 'search.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,7 +61,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         body: Container(
       width: double.infinity,
-      color: const Color.fromARGB(255, 0, 0, 0),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+        const Color(0xff135c84),
+        const Color(0xff80d0c7),
+      ])),
       child: Column(
         children: [
           const SizedBox(
@@ -87,6 +92,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             child: ListView.builder(
+              scrollDirection: Axis.vertical,
               itemCount: titles.length,
               itemBuilder: (context, index) {
                 return Container(
@@ -141,6 +147,56 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Icon(Icons.home, color: Colors.white, size: 35),
+                  const Text(
+                    'Home',
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const Search();
+                    },
+                  ));
+                },
+                child: Column(
+                  children: [
+                    Icon(Icons.search, color: Colors.white, size: 35),
+                    const Text(
+                      'Search',
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Icon(Icons.person, color: Colors.white, size: 35),
+                  const Text(
+                    'Profile',
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Icon(Icons.settings, color: Colors.white, size: 35),
+                  const Text(
+                    'Settings',
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
+            ],
+          )
         ],
       ),
     ));

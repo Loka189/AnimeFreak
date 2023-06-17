@@ -37,6 +37,7 @@ class _HorizontalState extends State<Horizontal> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         color: Colors.black,
         child: Column(
           children: [
@@ -54,25 +55,21 @@ class _HorizontalState extends State<Horizontal> {
                     fontSize: 25),
               ),
             ),
-            Container(
-              height: 200,
+            Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
+                itemCount: titles.length,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.all(10),
-                    child: Container(
-                      width: 140,
-                      color: Colors.white,
-                      child: Image.network(
+                    child: ListTile(
+                      leading: Image.network(
                         img[index],
-                        fit: BoxFit.cover,
-                        filterQuality: FilterQuality.high,
                       ),
                     ),
                   );
                 },
-                itemCount: titles.length,
+                itemExtent: 100,
               ),
             )
           ],
@@ -110,7 +107,7 @@ class provideTopAnime {
     for (var i = 0; i < length; i++) {
       titles.add(data[i]['title_english']);
       IDs.add(data[i]['mal_id']);
-      images.add(data[i]['images']['jpg']['small_image_url']);
+      images.add(data[i]['images']['jpg']['large_image_url']);
       episodes.add(data[i]['episodes']);
       synopsis.add(data[i]['synopsis']);
       scores.add(data[i]['score']);
