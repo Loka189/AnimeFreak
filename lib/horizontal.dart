@@ -55,128 +55,206 @@ class _HorizontalState extends State<Horizontal> {
                     fontSize: 25),
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: titles.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: const Color.fromARGB(255, 247, 31, 31),
-                    child: Container(
-                      width: 300,
-                      height: 500,
-                      child: Column(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    backgroundColor: const Color(0xff135c84),
-                                    title: Text(
-                                      titles[index],
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                    content: SingleChildScrollView(
-                                      child: Text(
-                                        synopsis[index],
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text(
-                                            'Close',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ))
+            Container(
+              height: 260,
+              color: Color.fromARGB(255, 62, 223, 18),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Top Anime',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 18)),
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                backgroundColor: const Color(0xff135c84),
+                                title: const Text(
+                                  'Top Anime',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      for (var i = 0; i < titles.length; i++)
+                                        Text(
+                                          '${i + 1}. ${titles[i]}',
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
                                     ],
-                                  );
-                                },
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text(
+                                        'Close',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ))
+                                ],
                               );
                             },
-                            child: Image.network(
-                              img[index],
-                              height: 200,
-                              width: 300,
-                              fit: BoxFit.cover,
+                          );
+                        },
+                        child: Text(
+                          'see all>',
+                        ),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: titles.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          color: const Color.fromARGB(255, 247, 31, 31),
+                          child: Container(
+                            width: 175,
+                            child: Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          backgroundColor:
+                                              const Color(0xff135c84),
+                                          title: Text(
+                                            titles[index],
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                          content: SingleChildScrollView(
+                                            child: Text(
+                                              synopsis[index],
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Text(
+                                                  'Close',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ))
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Image.network(
+                                    img[index],
+                                    height: 180,
+                                    width: 120,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: Text(
+                                      titles[index],
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.star, color: Colors.amber),
+                                        Text(
+                                          '${scores[index]}',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      '##${rank[index]}',
+                                      style: TextStyle(color: Colors.white),
+                                    )
+                                  ],
+                                )
+                                // Text(
+                                //   'Rank: ${rank[index]}',
+                                //   style: const TextStyle(
+                                //       color: Colors.white,
+                                //       fontWeight: FontWeight.w500,
+                                //       fontSize: 12),
+                                // ),
+
+                                // Text(
+                                //   'Year: ${year[index]}',
+                                //   style: const TextStyle(
+                                //       color: Colors.white,
+                                //       fontWeight: FontWeight.bold,
+                                //       fontSize: 15),
+                                // ),
+                                // const SizedBox(
+                                //   height: 10,
+                                // ),
+                                // Text(
+                                //   'Score: ${scores[index]}',
+                                //   style: const TextStyle(
+                                //       color: Colors.white,
+                                //       fontWeight: FontWeight.bold,
+                                //       fontSize: 15),
+                                // ),
+                                // const SizedBox(
+                                //   height: 10,
+                                // ),
+                                // Text(
+                                //   'Synopsis: ${synopsis[index]}',
+                                //   style: const TextStyle(
+                                //       color: Colors.white,
+                                //       fontWeight: FontWeight.bold,
+                                //       fontSize: 15),
+                                // ),
+                              ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            titles[index],
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Episodes: ${episodes[index]}',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Rank: ${rank[index]}',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          // Text(
-                          //   'Year: ${year[index]}',
-                          //   style: const TextStyle(
-                          //       color: Colors.white,
-                          //       fontWeight: FontWeight.bold,
-                          //       fontSize: 15),
-                          // ),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
-                          // Text(
-                          //   'Score: ${scores[index]}',
-                          //   style: const TextStyle(
-                          //       color: Colors.white,
-                          //       fontWeight: FontWeight.bold,
-                          //       fontSize: 15),
-                          // ),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
-                          // Text(
-                          //   'Synopsis: ${synopsis[index]}',
-                          //   style: const TextStyle(
-                          //       color: Colors.white,
-                          //       fontWeight: FontWeight.bold,
-                          //       fontSize: 15),
-                          // ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             )
           ],
