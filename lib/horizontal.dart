@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 
+import 'package:simple_gradient_text/simple_gradient_text.dart';
+
 class Horizontal extends StatefulWidget {
   @override
   State<Horizontal> createState() => _HorizontalState();
@@ -17,7 +19,6 @@ class _HorizontalState extends State<Horizontal> {
   var scores = [];
   void initState() {
     super.initState();
-
     getTopAnimeData();
   }
 
@@ -38,7 +39,11 @@ class _HorizontalState extends State<Horizontal> {
     return Scaffold(
       body: Container(
         height: double.infinity,
-        color: Colors.black,
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Color(0xff06142E),
+          Color(0xff06142E),
+        ])),
         child: Column(
           children: [
             const SizedBox(
@@ -46,27 +51,33 @@ class _HorizontalState extends State<Horizontal> {
             ),
             Container(
               height: 50,
-              color: const Color.fromARGB(255, 0, 0, 0),
-              child: const Text(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                Color(0xff06142E),
+                Color(0xff06142E),
+              ])),
+              child: GradientText(
+                colors: const [
+                  Color(0xff7fb6e9),
+                  Color(0xffb6d9f8),
+                  Color(0xffe4f2ff)
+                ],
                 'AnimeFreak',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
             ),
             Container(
               height: 260,
-              color: Color.fromARGB(255, 62, 223, 18),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Top Anime',
+                      const Text('Top Anime',
                           style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                               fontSize: 18)),
                       InkWell(
                         onTap: () {
@@ -112,8 +123,11 @@ class _HorizontalState extends State<Horizontal> {
                             },
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           'see all>',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline),
                         ),
                       ),
                     ],
@@ -124,9 +138,10 @@ class _HorizontalState extends State<Horizontal> {
                       itemCount: titles.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          color: const Color.fromARGB(255, 247, 31, 31),
+                          elevation: 4,
+                          color: const Color.fromARGB(255, 9, 29, 67),
                           child: Container(
-                            width: 175,
+                            width: 150,
                             child: Column(
                               children: [
                                 InkWell(
@@ -171,11 +186,10 @@ class _HorizontalState extends State<Horizontal> {
                                   child: Image.network(
                                     img[index],
                                     height: 180,
-                                    width: 120,
+                                    width: 150,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-
                                 Expanded(
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.vertical,
@@ -189,7 +203,6 @@ class _HorizontalState extends State<Horizontal> {
                                     ),
                                   ),
                                 ),
-
                                 const SizedBox(
                                   height: 5,
                                 ),
@@ -208,45 +221,11 @@ class _HorizontalState extends State<Horizontal> {
                                     ),
                                     Text(
                                       '##${rank[index]}',
-                                      style: TextStyle(color: Colors.white),
+                                      style:
+                                          const TextStyle(color: Colors.blue),
                                     )
                                   ],
                                 )
-                                // Text(
-                                //   'Rank: ${rank[index]}',
-                                //   style: const TextStyle(
-                                //       color: Colors.white,
-                                //       fontWeight: FontWeight.w500,
-                                //       fontSize: 12),
-                                // ),
-
-                                // Text(
-                                //   'Year: ${year[index]}',
-                                //   style: const TextStyle(
-                                //       color: Colors.white,
-                                //       fontWeight: FontWeight.bold,
-                                //       fontSize: 15),
-                                // ),
-                                // const SizedBox(
-                                //   height: 10,
-                                // ),
-                                // Text(
-                                //   'Score: ${scores[index]}',
-                                //   style: const TextStyle(
-                                //       color: Colors.white,
-                                //       fontWeight: FontWeight.bold,
-                                //       fontSize: 15),
-                                // ),
-                                // const SizedBox(
-                                //   height: 10,
-                                // ),
-                                // Text(
-                                //   'Synopsis: ${synopsis[index]}',
-                                //   style: const TextStyle(
-                                //       color: Colors.white,
-                                //       fontWeight: FontWeight.bold,
-                                //       fontSize: 15),
-                                // ),
                               ],
                             ),
                           ),

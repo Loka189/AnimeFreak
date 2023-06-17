@@ -66,63 +66,168 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           height: 5,
         ),
-        Expanded(
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: titles.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: ListTile(
-                  leading: Image.network(img[index]),
-                  title: Text(
-                    titles[index],
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  trailing: Text(
-                    'Rank: ${rank[index]}',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          backgroundColor: const Color(0xff135c84),
-                          title: Text(
-                            titles[index],
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          content: SingleChildScrollView(
-                            child: Text(
-                              synopsis[index],
-                              style: const TextStyle(color: Colors.white),
+        Container(
+          height: 260,
+          color: Color.fromARGB(255, 62, 223, 18),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Top Anime',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18)),
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            backgroundColor: const Color(0xff135c84),
+                            title: const Text(
+                              'Top Anime',
+                              style: TextStyle(color: Colors.white),
                             ),
-                          ),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text(
-                                  'Close',
-                                  style: TextStyle(
+                            content: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  for (var i = 0; i < titles.length; i++)
+                                    Text(
+                                      '${i + 1}. ${titles[i]}',
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    'Close',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ))
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Text(
+                      'see all>',
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: titles.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      color: const Color.fromARGB(255, 247, 31, 31),
+                      child: Container(
+                        width: 175,
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      backgroundColor: const Color(0xff135c84),
+                                      title: Text(
+                                        titles[index],
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                      content: SingleChildScrollView(
+                                        child: Text(
+                                          synopsis[index],
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text(
+                                              'Close',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ))
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Image.network(
+                                img[index],
+                                height: 180,
+                                width: 120,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Expanded(
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Text(
+                                  titles[index],
+                                  style: const TextStyle(
                                     color: Colors.white,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15,
                                   ),
-                                ))
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(Icons.star, color: Colors.amber),
+                                    Text(
+                                      '${scores[index]}',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '##${rank[index]}',
+                                  style: TextStyle(color: Colors.white),
+                                )
+                              ],
+                            )
                           ],
-                        );
-                      },
+                        ),
+                      ),
                     );
                   },
                 ),
-              );
-            },
+              ),
+            ],
           ),
-        ),
+        )
       ],
     );
   }

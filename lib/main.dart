@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:initstate/homepage.dart';
+import 'package:initstate/horizontal.dart';
 import 'search.dart';
 
 void main() {
@@ -28,13 +29,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int index = 0;
-  var pages = [const HomeScreen(), const Search()];
+  var pages = [Horizontal(), const Search()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
           Color(0xff06142E),
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0xff1B3358),
+        backgroundColor: const Color.fromARGB(255, 9, 29, 67),
         selectedIconTheme: const IconThemeData(
             color: Color(
               0xffb6d9f8,
