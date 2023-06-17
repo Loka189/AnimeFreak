@@ -117,3 +117,6 @@ class provideTopAnime {
     return mainData;
   }
 }
+//  Color(0xff7fb6e9),
+//                                         Color(0xffb6d9f8),
+//                                         Color(0xffe4f2ff)

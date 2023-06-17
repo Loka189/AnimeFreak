@@ -40,98 +40,90 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-        Color(0xff06142E),
-        Color(0xff06142E),
-      ])),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 45,
+    return Column(
+      children: [
+        const SizedBox(
+          height: 45,
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return Horizontal();
+              },
+            ));
+          },
+          child: GradientText(
+            colors: const [
+              Color(0xff7fb6e9),
+              Color(0xffb6d9f8),
+              Color(0xffe4f2ff)
+            ],
+            "AnimeFreak",
+            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
-          InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return Horizontal();
-                },
-              ));
-            },
-            child: GradientText(
-              colors: const [
-                Color(0xff7fb6e9),
-                Color(0xffb6d9f8),
-                Color(0xffe4f2ff)
-              ],
-              "AnimeFreak",
-              style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: titles.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: ListTile(
-                    leading: Image.network(img[index]),
-                    title: Text(
-                      titles[index],
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    trailing: Text(
-                      'Rank: ${rank[index]}',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            backgroundColor: const Color(0xff135c84),
-                            title: Text(
-                              titles[index],
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Expanded(
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: titles.length,
+            itemBuilder: (context, index) {
+              return Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: ListTile(
+                  leading: Image.network(img[index]),
+                  title: Text(
+                    titles[index],
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  trailing: Text(
+                    'Rank: ${rank[index]}',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          backgroundColor: const Color(0xff135c84),
+                          title: Text(
+                            titles[index],
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          content: SingleChildScrollView(
+                            child: Text(
+                              synopsis[index],
                               style: const TextStyle(color: Colors.white),
                             ),
-                            content: SingleChildScrollView(
-                              child: Text(
-                                synopsis[index],
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text(
-                                    'Close',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ))
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
+                          ),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'Close',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ))
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
