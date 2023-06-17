@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'horizontal.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   var rank = [];
   var year = [];
   var scores = [];
+
   @override
   void initState() {
     super.initState();
@@ -59,65 +61,93 @@ class _HomePageState extends State<HomePage> {
         body: Container(
       width: double.infinity,
       color: const Color.fromARGB(255, 0, 0, 0),
-      child: Expanded(
-        child: ListView.builder(
-          itemCount: titles.length,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: ListTile(
-                leading: Image.network(img[index]),
-                title: Text(
-                  titles[index],
-                  style: const TextStyle(color: Colors.white),
-                ),
-                trailing: Text(
-                  'Rank: ${rank[index]}',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        backgroundColor: Color(0xff135c84),
-                        title: Text(
-                          titles[index],
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        content: SingleChildScrollView(
-                          child: Text(
-                            synopsis[index],
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text(
-                                'Close',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ))
-                        ],
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 35,
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return Horizontal();
+                },
+              ));
+            },
+            child: const Text(
+              "AnimeFreak",
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: titles.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: ListTile(
+                    leading: Image.network(img[index]),
+                    title: Text(
+                      titles[index],
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    trailing: Text(
+                      'Rank: ${rank[index]}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            backgroundColor: const Color(0xff135c84),
+                            title: Text(
+                              titles[index],
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            content: SingleChildScrollView(
+                              child: Text(
+                                synopsis[index],
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    'Close',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ))
+                            ],
+                          );
+                        },
                       );
                     },
-                  );
-                },
-              ),
-            );
-          },
-        ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     ));
   }
 }
 
+// ignore: camel_case_types
 class provideTopAnime {
   Future<Map> getTopAnime() async {
     Response response =
