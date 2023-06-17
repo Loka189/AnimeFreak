@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'dart:convert';
 import 'horizontal.dart';
 import 'search.dart';
@@ -36,6 +37,8 @@ class _HomePageState extends State<HomePage> {
   var rank = [];
   var year = [];
   var scores = [];
+  int index = 0;
+  var pages = [HomePage(), Search()];
 
   @override
   void initState() {
@@ -59,147 +62,127 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-        const Color(0xff135c84),
-        const Color(0xff80d0c7),
-      ])),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 35,
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return Horizontal();
-                },
-              ));
-            },
-            child: const Text(
-              "AnimeFreak",
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Color(0xff06142E),
+          Color(0xff06142E),
+        ])),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 45,
             ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: titles.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: ListTile(
-                    leading: Image.network(img[index]),
-                    title: Text(
-                      titles[index],
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    trailing: Text(
-                      'Rank: ${rank[index]}',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            backgroundColor: const Color(0xff135c84),
-                            title: Text(
-                              titles[index],
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            content: SingleChildScrollView(
-                              child: Text(
-                                synopsis[index],
+            InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Horizontal();
+                  },
+                ));
+              },
+              child: GradientText(
+                colors: const [
+                  Color(0xff7fb6e9),
+                  Color(0xffb6d9f8),
+                  Color(0xffe4f2ff)
+                ],
+                "AnimeFreak",
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: titles.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    child: ListTile(
+                      leading: Image.network(img[index]),
+                      title: Text(
+                        titles[index],
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      trailing: Text(
+                        'Rank: ${rank[index]}',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              backgroundColor: const Color(0xff135c84),
+                              title: Text(
+                                titles[index],
                                 style: const TextStyle(color: Colors.white),
                               ),
-                            ),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text(
-                                    'Close',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ))
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  Icon(Icons.home, color: Colors.white, size: 35),
-                  const Text(
-                    'Home',
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const Search();
-                    },
-                  ));
+                              content: SingleChildScrollView(
+                                child: Text(
+                                  synopsis[index],
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      'Close',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ))
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  );
                 },
-                child: Column(
-                  children: [
-                    Icon(Icons.search, color: Colors.white, size: 35),
-                    const Text(
-                      'Search',
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
               ),
-              Column(
-                children: [
-                  Icon(Icons.person, color: Colors.white, size: 35),
-                  const Text(
-                    'Profile',
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Icon(Icons.settings, color: Colors.white, size: 35),
-                  const Text(
-                    'Settings',
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
-            ],
-          )
-        ],
+            ),
+          ],
+        ),
       ),
-    ));
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: const Color(0xff1B3358)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+              backgroundColor: const Color(0xff1B3358)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+              backgroundColor: const Color(0xff1B3358)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+              backgroundColor: const Color(0xff1B3358)),
+        ],
+        currentIndex: index,
+        onTap: (value) {
+          setState(() {
+            index = value;
+          });
+        },
+      ),
+    );
   }
 }
 
