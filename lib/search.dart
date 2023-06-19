@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:initstate/main.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -146,121 +144,6 @@ class _SearchState extends State<Search> {
                   );
                 },
               )),
-              // Container(
-              //   decoration: const BoxDecoration(
-              //       color: Color.fromARGB(224, 5, 21, 51),
-              //       border: Border(top: BorderSide(color: Color(0xff1B3358)))),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //     children: [
-              //       InkWell(
-              //         onTap: () {
-              //           Navigator.pop(context, MaterialPageRoute(
-              //             builder: (context) {
-              //               return const HomePage();
-              //             },
-              //           ));
-              //         },
-              //         child: Column(
-              //           children: [
-              //             ShaderMask(
-              //                 shaderCallback: (bounds) => const LinearGradient(
-              //                         colors: [
-              //                           Color(0xff7fb6e9),
-              //                           Color(0xffb6d9f8),
-              //                           Color(0xffe4f2ff)
-              //                         ]).createShader(bounds),
-              //                 child: const Icon(Icons.home,
-              //                     color: Colors.white, size: 35)),
-              //             GradientText(
-              //               'Home',
-              //               colors: const [
-              //                 Color(0xff7fb6e9),
-              //                 Color(0xffb6d9f8),
-              //                 Color(0xffe4f2ff)
-              //               ],
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //       InkWell(
-              //         onTap: () {
-              //           Navigator.push(context, MaterialPageRoute(
-              //             builder: (context) {
-              //               return const Search();
-              //             },
-              //           ));
-              //         },
-              //         child: Column(
-              //           children: [
-              //             ShaderMask(
-              //                 shaderCallback: (bounds) => const LinearGradient(
-              //                         colors: [
-              //                           Color(0xff7fb6e9),
-              //                           Color(0xffb6d9f8),
-              //                           Color(0xffe4f2ff)
-              //                         ]).createShader(bounds),
-              //                 child: const Icon(
-              //                   Icons.search,
-              //                   color: Colors.white,
-              //                   size: 35,
-              //                 )),
-              //             GradientText(
-              //               'Search',
-              //               colors: const [
-              //                 Color(0xff7fb6e9),
-              //                 Color(0xffb6d9f8),
-              //                 Color(0xffe4f2ff)
-              //               ],
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //       Column(
-              //         children: [
-              //           ShaderMask(
-              //               shaderCallback: (bounds) => const LinearGradient(
-              //                       colors: [
-              //                         Color(0xff7fb6e9),
-              //                         Color(0xffb6d9f8),
-              //                         Color(0xffe4f2ff)
-              //                       ]).createShader(bounds),
-              //               child: const Icon(Icons.person,
-              //                   color: Colors.white, size: 35)),
-              //           GradientText(
-              //             colors: const [
-              //               Color(0xff7fb6e9),
-              //               Color(0xffb6d9f8),
-              //               Color(0xffe4f2ff)
-              //             ],
-              //             'Profile',
-              //           )
-              //         ],
-              //       ),
-              //       Column(
-              //         children: [
-              //           ShaderMask(
-              //               shaderCallback: (bounds) => const LinearGradient(
-              //                       colors: [
-              //                         Color(0xff7fb6e9),
-              //                         Color(0xffb6d9f8),
-              //                         Color(0xffe4f2ff)
-              //                       ]).createShader(bounds),
-              //               child: const Icon(Icons.settings,
-              //                   color: Colors.white, size: 35)),
-              //           GradientText(
-              //             colors: const [
-              //               Color(0xff7fb6e9),
-              //               Color(0xffb6d9f8),
-              //               Color(0xffe4f2ff)
-              //             ],
-              //             'Settings',
-              //           )
-              //         ],
-              //       ),
-              //     ],
-              //   ),
-              // ),
             ],
           )),
     );
