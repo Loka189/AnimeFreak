@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:initstate/horizontal.dart';
 import 'search.dart';
+import 'movies/topImdbMovie.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +29,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int index = 0;
-  var pages = [Horizontal(), const Search()];
+  var pages = [
+    Horizontal(),
+    const Search(),
+    const MyMovies(),
+    const Placeholder()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +72,8 @@ class _HomePageState extends State<HomePage> {
               label: 'Search',
               backgroundColor: Color(0xff1B3358)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: Icon(Icons.movie),
+              label: 'Movies',
               backgroundColor: Color(0xff1B3358)),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings),

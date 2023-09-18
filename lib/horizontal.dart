@@ -212,10 +212,12 @@ class _HorizontalState extends State<Horizontal> {
                                   children: [
                                     Row(
                                       children: [
-                                        Icon(Icons.star, color: Colors.amber),
+                                        const Icon(Icons.star,
+                                            color: Colors.amber),
                                         Text(
                                           '${scores[index]}',
-                                          style: TextStyle(color: Colors.white),
+                                          style: const TextStyle(
+                                              color: Colors.white),
                                         ),
                                       ],
                                     ),
